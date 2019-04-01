@@ -1,3 +1,4 @@
+# First message to run
 print("Welcome to DarrotOS 0.1.1")
 print("(c) 2019 Yetroll Enterprises; CarroTech Industries; The coding Monkeys inc ")
 print("Coded by Daniel P, Shaurya J and Malakai H")
@@ -16,11 +17,15 @@ def my_random_string(string_length):
 
 # Functions stop here
 
+try:
+    passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "r")
+    import datetime
+    passwordCheck = "null"
+    import time
+except:
+    print("The directory of the 'Assets' file was not detected.")
+    time.sleep(2)
 
-passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "r")
-import datetime
-passwordCheck = "null"
-import time
 
 with open(r"E:\Programming\Daniel_OS_pass.txt", "r") as f:
     data = f.readlines()
@@ -31,14 +36,21 @@ for line in data:
 password = infoList[0]
 FAemail = infoList[1]
 FAstate = infoList[2]
+
+# This script checks the time is 1st of April
 currentDT = datetime.datetime.now()
-print(currentDT.strftime("%m"))
+if currentDT.strftime("%m") == "04" and currentDT.strftime("%d") == "01":
+    print("Happy April Fools Day! (;")
+
+# Resets all variables
 unlockAttempt = 0
 n1 = 0
 n2 = 1
 name = 0
 age = 0
 loggingIn = 1
+
+# Checks for Password
 while loggingIn == 1:
     userInput = input("Please enter the password ")
     if userInput == password:
@@ -89,6 +101,7 @@ n2 = 0
 while n2 == 0:
     commandInput = input("How may I help you today? ")
     if commandInput == "/help":
+        # Put all the help for commands here
         print("Use /calculator to do basic addition problems!")
         print("Use /setpassword to change your password!")
         print("Use /shutdown to shutdown the terminal!")
@@ -100,58 +113,61 @@ while n2 == 0:
         print("Use /2FAconfig to enable or disable 2FA")
     else:
         if commandInput == "/calculator":
-            n = 0
-            k = 0
-            operation = 0
-            while n == 0:
+            try:
+                n = 0
                 k = 0
                 operation = 0
-                print("Welcome to the calculator! I support addition, subtraction, division and multiplication!")
-                input("Press enter to continue!")
-                while operation == 0:
-                    print("Would you like for me to")
-                    print("Add (a)")
-                    print("Subtract (s)")
-                    print("Multiply (m)")
-                    inputAnswer = input("or Divide? (d)")
+                while n == 0:
+                    k = 0
+                    operation = 0
+                    print("Welcome to the calculator! I support addition, subtraction, division and multiplication!")
+                    input("Press enter to continue!")
+                    while operation == 0:
+                        print("Would you like for me to")
+                        print("Add (a)")
+                        print("Subtract (s)")
+                        print("Multiply (m)")
+                        inputAnswer = input("or Divide? (d)")
+                        if inputAnswer == "a":
+                            operation = "a"
+                        else:
+                            if inputAnswer == "s":
+                                operation = "s"
+                            else:
+                                if inputAnswer == "m":
+                                    operation = "m"
+                                else:
+                                    if inputAnswer == "d":
+                                        operation = "d"
+                                    else:
+                                        print("Sorry! Please use either a, s, m or d")
+                    firstNumber = int(input("What is your first number? "))
+                    secondNumber = int(input("What is your second number? "))
                     if inputAnswer == "a":
-                        operation = "a"
+                        answer = firstNumber + secondNumber
                     else:
                         if inputAnswer == "s":
-                            operation = "s"
+                            answer = firstNumber - secondNumber
                         else:
                             if inputAnswer == "m":
-                                operation = "m"
+                                answer = firstNumber * secondNumber
                             else:
                                 if inputAnswer == "d":
-                                    operation = "d"
-                                else:
-                                    print("Sorry! Please use either a, s, m or d")
-                firstNumber = int(input("What is your first number? "))
-                secondNumber = int(input("What is your second number? "))
-                if inputAnswer == "a":
-                    answer = firstNumber + secondNumber
-                else:
-                    if inputAnswer == "s":
-                        answer = firstNumber - secondNumber
-                    else:
-                        if inputAnswer == "m":
-                            answer = firstNumber * secondNumber
-                        else:
-                            if inputAnswer == "d":
-                                answer = firstNumber / secondNumber
-                print("Your answer was", answer)
-                while k == 0:
-                    inputAnswer = input("Would you like to use the calculator again? [y / n] ")
-                    if inputAnswer == "n":
-                        n = 1
-                        k = 1
-                    else:
-                        if inputAnswer == "y":
-                            print("Sure thing!")
+                                    answer = firstNumber / secondNumber
+                    print("Your answer was", answer)
+                    while k == 0:
+                        inputAnswer = input("Would you like to use the calculator again? [y / n] ")
+                        if inputAnswer == "n":
+                            n = 1
                             k = 1
                         else:
-                            print("Please enter either y or n")
+                            if inputAnswer == "y":
+                                print("Sure thing!")
+                                k = 1
+                            else:
+                                print("Please enter either y or n")
+            except:
+                print("It seems that an number that you have inputted has crashed the calculator. Please try again.")
 
         else:
             if commandInput == "/setPass":
@@ -181,6 +197,7 @@ while n2 == 0:
                     n2 = 1
                 else:
                     if commandInput == "/setinfo":
+                        # I need to implement this to make it write the info the the text file
                         name = input("What is your name? ")
                         age = input("What is your age? ")
 
@@ -194,10 +211,12 @@ while n2 == 0:
                                 print("You are", age, "years old")
                         else:
                             if commandInput == "/time":
+                                # Fetches the time and formats it to display it
                                 currentDT = datetime.datetime.now()
                                 print("The current time is", (currentDT.strftime("%I:%M:%S %p")))
                             else:
                                 if commandInput == "/date":
+                                    # Fetches the date and formats it to display it
                                     currentDT = datetime.datetime.now()
                                     print("The current date is", (currentDT.strftime("%d/%m/%Y")))
                                 else:
@@ -212,6 +231,7 @@ while n2 == 0:
                                             print("Sorry, incorrect password")
                                     else:
                                         if commandInput == "/2FAconfig":
+                                        # You can enable or disable 2FA right here
                                             userInput = input("Would you like to enable 2FA (/enable2FA) or disable 2FA (/disable2FA)? ")
                                             if userInput == "/enable2FA":
                                                 passwordCheck = input("Verify it's you by inputting the previous password ")
