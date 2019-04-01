@@ -1,1 +1,76 @@
+import uuid
+import smtplib, ssl
 
+def my_random_string(string_length):
+    """Returns a random string of length string_length."""
+    random = str(uuid.uuid4()) # Convert UUID format to a Python string.
+    random = random.upper() # Make all characters uppercase.
+    random = random.replace("-","") # Remove the UUID '-'.
+    return random[0:string_length] # Return the random string.
+
+passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "r")
+import datetime
+passwordCheck = "null"
+import time
+
+with open(r"E:\Programming\Daniel_OS_pass.txt", "r") as f:
+    data = f.readlines()
+
+for line in data:
+    infoList = line.split(";")
+
+password = infoList[0]
+FAemail = infoList[1]
+FAstate = infoList[2]
+currentDT = datetime.datetime.now()
+print(currentDT.strftime("%m"))
+unlockAttempt = 0
+n1 = 0
+n2 = 1
+name = 0
+age = 0
+loggingIn = 1
+while loggingIn == 1:
+    userInput = input("Please enter the password ")
+    if userInput == password:
+        print("Password correct!")
+        if infoList[2] == "true":
+            print("2FA has been enabled.")
+            FAcode = my_random_string(8)
+            port = 465  # For SSL
+            password = "5xPCPGIsBn6YN8sangyYY7bVB#QD#ahi3UYEF&zsAsKINH4rYxem61Mngmy#02@8"
+
+            # Create a secure SSL context
+            context = ssl.create_default_context()
+
+            with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+                server.login("develeopmenttest1@gmail.com", password)
+
+                import smtplib, ssl
+
+            port = 465  # For SSL
+            smtp_server = "smtp.gmail.com"
+            sender_email = "develeopmenttest1@gmail.com"  # Enter your address
+
+            message = """Subject: Your 2FA code
+            
+                        Thank you for enabling 2FA. Your 2FA code is {FA}""".format(FA=FAcode)
+
+            context = ssl.create_default_context()
+            with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+                server.login(sender_email, password)
+                server.sendmail(sender_email, FAemail, message)
+            print("An email has been sent to", FAemail)
+            userInput = input("Please input the code below ")
+            if userInput == FAcode:
+                print("Access Granted!")
+                passFile.close()
+                loggingIn = 0
+            else:
+                print("Incorrect code")
+        else:
+            print("Access Granted!")
+            passFile.close()
+            loggingIn = 0
+    else:
+        print("Incorrect password, please try again")
