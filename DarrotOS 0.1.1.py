@@ -4,6 +4,8 @@ print("(c) 2019 Yetroll Enterprises; CarroTech Industries; The coding Monkeys in
 print("Coded by Daniel P, Shaurya J and Malakai H")
 import uuid
 import smtplib, ssl
+import time
+import datetime
 
 # All functions go here:
 
@@ -19,12 +21,11 @@ def my_random_string(string_length):
 
 try:
     passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "r")
-    import datetime
     passwordCheck = "null"
-    import time
 except:
     print("The directory of the 'Assets' file was not detected.")
     time.sleep(2)
+    exit()
 
 
 with open(r"E:\Programming\Daniel_OS_pass.txt", "r") as f:
@@ -102,7 +103,7 @@ while n2 == 0:
     commandInput = input("How may I help you today? ")
     if commandInput == "/help":
         # Put all the help for commands here
-        print("use /sysinfo to bring up information about the system!")
+        print("Use /sysinfo to bring up information about the system!")
         print("Use /calculator to do basic addition problems!")
         print("Use /setpassword to change your password!")
         print("Use /shutdown to shutdown the terminal!")
