@@ -1,7 +1,10 @@
-# By Daniel Pavela 2019
-# Copyright Daniel Pavela
+print("Welcome to DarrotOS 0.1.1")
+print("(c) 2019 Yetroll Enterprises; CarroTech Industries; The coding Monkeys inc ")
+print("Coded by Daniel P, Shaurya J and Malakai H")
 import uuid
 import smtplib, ssl
+
+# All functions go here:
 
 def my_random_string(string_length):
     """Returns a random string of length string_length."""
@@ -9,6 +12,10 @@ def my_random_string(string_length):
     random = random.upper() # Make all characters uppercase.
     random = random.replace("-","") # Remove the UUID '-'.
     return random[0:string_length] # Return the random string.
+
+
+# Functions stop here
+
 
 passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "r")
 import datetime
@@ -307,4 +314,12 @@ while n2 == 0:
                                                 else:
                                                     print("Unknown command")
                                         else:
-                                            print("Unknown command")
+                                            if commandInput == "newCommandHere":
+                                                print("Work in progress (This is put here to prevent a syntax error")
+                                                # New command goes here
+                                            else:
+                                                if commandInput == "newCommandHere":
+                                                    print("Work in progress (This is put here to prevent a syntax error")
+                                                    # New command goes here
+                                                else:
+                                                    print("Unknown command")
