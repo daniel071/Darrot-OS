@@ -13,29 +13,27 @@ print("(c) 2019 Yetroll Enterprises; CarroTech Industries; The coding Monkeys in
 print("Coded by Daniel P, Shaurya J and Malakai H")
 
 
-
 # All functions go here:
 
 def my_random_string(string_length):
     """Returns a random string of length string_length."""
-    random = str(uuid.uuid4()) # Convert UUID format to a Python string.
-    random = random.upper() # Make all characters uppercase.
-    random = random.replace("-","") # Remove the UUID '-'.
-    return random[0:string_length] # Return the random string.
+    random = str(uuid.uuid4())  # Convert UUID format to a Python string.
+    random = random.upper()  # Make all characters uppercase.
+    random = random.replace("-", "")  # Remove the UUID '-'.
+    return random[0:string_length]  # Return the random string.
 
 
 # Functions stop here
 
 try:
-    passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "r")
+    passFile = open(r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt", "r")
     passwordCheck = "null"
 except:
     print("The directory of the 'Assets' file was not detected.")
     time.sleep(2)
     exit()
 
-
-with open(r"E:\Programming\Daniel_OS_pass.txt", "r") as f:
+with open(r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt", "r") as f:
     data = f.readlines()
 
 for line in data:
@@ -44,6 +42,8 @@ for line in data:
 password = infoList[0]
 FAemail = infoList[1]
 FAstate = infoList[2]
+name = infoList[3]
+age = infoList[4]
 
 # This script checks the time is 1st of April
 currentDT = datetime.datetime.now()
@@ -54,8 +54,6 @@ if currentDT.strftime("%m") == "04" and currentDT.strftime("%d") == "01":
 unlockAttempt = 0
 n1 = 0
 n2 = 1
-name = 0
-age = 0
 loggingIn = 1
 
 # Checks for Password
@@ -82,7 +80,7 @@ while loggingIn == 1:
             sender_email = "develeopmenttest1@gmail.com"  # Enter your address
 
             message = """Subject: Your 2FA code
-            
+
                         Thank you for enabling 2FA. Your 2FA code is {FA}""".format(FA=FAcode)
 
             context = ssl.create_default_context()
@@ -183,7 +181,7 @@ while n2 == 0:
                 passwordCheck = input("Verify it's you by inputting the previous password ")
                 if passwordCheck == password:
                     passFile.close()
-                    passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "w")
+                    passFile = open(r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt", "w")
                     passwordCheck = input("What would you like to set the password to? ")
                     print("password successfully set to", passwordCheck)
                     infoList[0] = passwordCheck
@@ -207,8 +205,15 @@ while n2 == 0:
                 else:
                     if commandInput == "/setinfo":
                         # I need to implement this to make it write the info the the text file
+                        passfile = open(r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt", "w")
                         name = input("What is your name? ")
                         age = input("What is your age? ")
+                        infoList[3] = name
+                        infoList[4] = age
+                        convertedList = ';'.join(infoList)
+                        print(convertedList)
+                        passFile.write(convertedList)
+                        pass
 
 
                     else:
@@ -232,18 +237,29 @@ while n2 == 0:
                                     if commandInput == "/changePass":
                                         oldPass = input("Please input old password ")
                                         if oldPass == password:
-                                            passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "w")
-                                            newPass = input("What would you like to change the password to? ")
-                                            passFile.write(newPass)
+                                            password = input("Please input the new password")
+                                            FAstate = "false"
+                                            passFile.close()
+                                            passFile = open(
+                                                r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt", "w")
+                                            infoList[0] = password
+                                            infoList[1] = FAemail
+                                            infoList[2] = FAstate
+                                            infoList[3] = name
+                                            infoList[4] = age
+                                            convertedList = ';'.join(infoList)
+                                            passFile.write(convertedList)
                                             passFile.close()
                                         else:
                                             print("Sorry, incorrect password")
                                     else:
                                         if commandInput == "/2FAconfig":
-                                        # You can enable or disable 2FA right here
-                                            userInput = input("Would you like to enable 2FA (/enable2FA) or disable 2FA (/disable2FA)? ")
+                                            # You can enable or disable 2FA right here
+                                            userInput = input(
+                                                "Would you like to enable 2FA (/enable2FA) or disable 2FA (/disable2FA)? ")
                                             if userInput == "/enable2FA":
-                                                passwordCheck = input("Verify it's you by inputting the previous password ")
+                                                passwordCheck = input(
+                                                    "Verify it's you by inputting the previous password ")
                                                 if passwordCheck == password:
                                                     FAemail = input("Please input your 2FA email ")
                                                     FAcode = my_random_string(8)
@@ -264,27 +280,32 @@ while n2 == 0:
                                                     sender_email = "develeopmenttest1@gmail.com"  # Enter your address
 
                                                     message = """Subject: Your 2FA code
-                                                                
-                                                                Thank you for enabling 2FA. Your 2FA code is {FA}""".format(FA=FAcode)
+
+                                                                Thank you for enabling 2FA. Your 2FA code is {FA}""".format(
+                                                        FA=FAcode)
 
                                                     context = ssl.create_default_context()
                                                     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
                                                         server.login(sender_email, password)
                                                         server.sendmail(sender_email, FAemail, message)
                                                     print("An email has been sent to", FAemail)
-                                                    userInput = input("We have sent you a 2FA code. Please input below ")
+                                                    userInput = input(
+                                                        "We have sent you a 2FA code. Please input below ")
 
                                                     if FAcode == userInput:
                                                         FAstate = "true"
                                                         passFile.close()
-                                                        passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "w")
+                                                        passFile = open(
+                                                            r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt",
+                                                            "w")
                                                         infoList[1] = FAemail
                                                         infoList[2] = FAstate
                                                         convertedList = ';'.join(infoList)
                                                         passFile.write(convertedList)
                                                         passFile.close()
 
-                                                        print("Two Factor Authentication has been enabled with", FAemail)
+                                                        print("Two Factor Authentication has been enabled with",
+                                                              FAemail)
                                                     else:
                                                         print("Incorrect code inputted, please try again")
 
@@ -294,7 +315,8 @@ while n2 == 0:
 
                                             else:
                                                 if userInput == "/disable2FA":
-                                                    passwordCheck = input("Verify it's you by inputting the previous password ")
+                                                    passwordCheck = input(
+                                                        "Verify it's you by inputting the previous password ")
                                                     if passwordCheck == password:
                                                         FAemail = input("Please input your 2FA email ")
                                                         FAcode = my_random_string(8)
@@ -315,8 +337,9 @@ while n2 == 0:
                                                         sender_email = "develeopmenttest1@gmail.com"  # Enter your address
 
                                                         message = """Subject: Your 2FA code
-                                                        
-                                                        Thank you for enabling 2FA. Your 2FA code is {FA}""".format(FA=FAcode)
+
+                                                        Thank you for enabling 2FA. Your 2FA code is {FA}""".format(
+                                                            FA=FAcode)
 
                                                         context = ssl.create_default_context()
                                                         with smtplib.SMTP_SSL(smtp_server, port,
@@ -324,18 +347,22 @@ while n2 == 0:
                                                             server.login(sender_email, password)
                                                             server.sendmail(sender_email, FAemail, message)
                                                         print("An email has been sent to", FAemail)
-                                                        userInput = input("We have sent you a 2FA code. Please input below ")
+                                                        userInput = input(
+                                                            "We have sent you a 2FA code. Please input below ")
                                                         if FAcode == userInput:
                                                             FAstate = "false"
                                                             passFile.close()
-                                                            passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "w")
+                                                            passFile = open(
+                                                                r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt",
+                                                                "w")
                                                             infoList[1] = FAemail
                                                             infoList[2] = FAstate
                                                             convertedList = ';'.join(infoList)
                                                             passFile.write(convertedList)
                                                             passFile.close()
 
-                                                            print("Two Factor Authentication has been disabled with",FAemail)
+                                                            print("Two Factor Authentication has been disabled with",
+                                                                  FAemail)
                                                         else:
                                                             print("Incorrect code inputted, please try again")
                                                     else:
@@ -345,15 +372,18 @@ while n2 == 0:
                                         else:
                                             if commandInput == "/sysinfo":
                                                 print("DarrotOS 0.1.1 system information")
-                                                print("(c) 2019 Yetroll Enterprises; CarroTech Industries; The Coding Monkeys inc ")
+                                                print(
+                                                    "(c) 2019 Yetroll Enterprises; CarroTech Industries; The Coding Monkeys inc ")
                                                 print("Coded by Daniel P, Shaurya J and Malakai H")
                                                 print("Root By Daniel P + Malakai H.")
-                                                print("You can visit the github page for this project ---> https://github.com/daniel071/Darrot-OS")
+                                                print(
+                                                    "You can visit the github page for this project ---> https://github.com/daniel071/Darrot-OS")
                                                 print("Coded on Python (Pycharm)")
                                                 # More info can be added here
                                             else:
                                                 if commandInput == "newCommandHere":
-                                                    print("Work in progress (This is put here to prevent a syntax error")
+                                                    print(
+                                                        "Work in progress (This is put here to prevent a syntax error")
                                                     # New command goes here
                                                 else:
                                                     print("Unknown command")
