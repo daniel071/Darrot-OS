@@ -1,1 +1,1 @@
-new;daniel.pavela@gmail.com;true
+new;email;false;0;0
