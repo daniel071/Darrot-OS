@@ -7,7 +7,7 @@ import smtplib, ssl
 import time
 import datetime
 
-# All functions go here:
+# All functions go here: 
 
 def my_random_string(string_length):
     """Returns a random string of length string_length."""
