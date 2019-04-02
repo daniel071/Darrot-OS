@@ -24,6 +24,7 @@ def my_random_string(string_length):
 
 
 # Functions stop here
+# Test commit
 
 try:
     passFile = open(r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt", "r")
