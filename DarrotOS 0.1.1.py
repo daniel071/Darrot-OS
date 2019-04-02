@@ -55,7 +55,9 @@ passFile.close()
 # This script checks the time is 1st of April
 currentDT = datetime.datetime.now()
 if currentDT.strftime("%m") == "04" and currentDT.strftime("%d") == "01":
-    print("Happy April Fools Day! (;")
+    print("Sorry, Darrot OS has been abandoned by it's creators and will unfortunately not be able to work anymore.")
+    time.sleep(2)
+    exit()
 
 # Resets all variables
 unlockAttempt = 0
