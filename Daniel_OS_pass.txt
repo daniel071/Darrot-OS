@@ -1,1 +1,1 @@
-new;email;false;0;0
+password;email;false;name;age

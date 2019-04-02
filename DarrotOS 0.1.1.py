@@ -26,14 +26,14 @@ def my_random_string(string_length):
 # Functions stop here
 
 try:
-    passFile = open(r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt", "r")
+    passFile = open(r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt", "r")
     passwordCheck = "null"
 except:
     print("The directory of the 'Assets' file was not detected.")
     time.sleep(2)
     exit()
 
-with open(r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt", "r") as f:
+with open(r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt", "r") as f:
     data = f.readlines()
 
 for line in data:
@@ -44,6 +44,8 @@ FAemail = infoList[1]
 FAstate = infoList[2]
 name = infoList[3]
 age = infoList[4]
+
+passFile.close()
 
 # This script checks the time is 1st of April
 currentDT = datetime.datetime.now()
@@ -181,7 +183,7 @@ while n2 == 0:
                 passwordCheck = input("Verify it's you by inputting the previous password ")
                 if passwordCheck == password:
                     passFile.close()
-                    passFile = open(r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt", "w")
+                    passFile = open(r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt", "w")
                     passwordCheck = input("What would you like to set the password to? ")
                     print("password successfully set to", passwordCheck)
                     infoList[0] = passwordCheck
@@ -205,14 +207,14 @@ while n2 == 0:
                 else:
                     if commandInput == "/setinfo":
                         # I need to implement this to make it write the info the the text file
-                        passfile = open(r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt", "w")
+                        passFile = open(r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt", "w")
                         name = input("What is your name? ")
                         age = input("What is your age? ")
                         infoList[3] = name
                         infoList[4] = age
                         convertedList = ';'.join(infoList)
-                        print(convertedList)
                         passFile.write(convertedList)
+                        passFile.close()
                         pass
 
 
@@ -241,7 +243,7 @@ while n2 == 0:
                                             FAstate = "false"
                                             passFile.close()
                                             passFile = open(
-                                                r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt", "w")
+                                                r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt", "w")
                                             infoList[0] = password
                                             infoList[1] = FAemail
                                             infoList[2] = FAstate
@@ -296,7 +298,7 @@ while n2 == 0:
                                                         FAstate = "true"
                                                         passFile.close()
                                                         passFile = open(
-                                                            r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt",
+                                                            r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt",
                                                             "w")
                                                         infoList[1] = FAemail
                                                         infoList[2] = FAstate
@@ -353,7 +355,7 @@ while n2 == 0:
                                                             FAstate = "false"
                                                             passFile.close()
                                                             passFile = open(
-                                                                r"C:\Users\Daniel\PycharmProjects\Darrot-OS\Daniel_OS_pass.txt",
+                                                                r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt",
                                                                 "w")
                                                             infoList[1] = FAemail
                                                             infoList[2] = FAstate
