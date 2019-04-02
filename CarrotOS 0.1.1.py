@@ -1,311 +1,359 @@
-print("Welcome to CarrotOS 0.1.1")
-print("(c) 2019 Yetroll Enterprises; CarroTech Industries ")
+# All import scripts to be here:
+import uuid
+import smtplib, ssl
+import time
+import datetime
+
+# Import scripts stop here
+
+
+# First message to run
+print("Welcome to DarrotOS 0.1.1")
+print("(c) 2019 Yetroll Enterprises; CarroTech Industries; The coding Monkeys inc ")
 print("Coded by Daniel P, Shaurya J and Malakai H")
-# By Daniel Pavela, Shaurya J and Malakai H 2019
-access = 0
-ips = 0
-f = open(r"pswrd.txt","r")
-if f.mode == "r":
-    contents = f.read()
-name1 = open(r"name.txt","r")
-if name1.mode == "r":
-    name = name1.read()
-age1 = open(r"age.txt","r")
-if age1.mode == "r":
-    age = age1.read()
-email1 = open(r"email.txt","r")
-if email1.mode == "r":
-    email = email1.read()
-hunterii = open(r"hunter2installed.txt","r")
-if hunterii.mode == "r":
-    Hunter2 = hunterii.read()
-while access == 0:
-    upa = input("Enter Password:")
-    if upa == contents:
-        print("Password Correct.")
-        access = 1
+
+
+
+# All functions go here:
+
+def my_random_string(string_length):
+    """Returns a random string of length string_length."""
+    random = str(uuid.uuid4()) # Convert UUID format to a Python string.
+    random = random.upper() # Make all characters uppercase.
+    random = random.replace("-","") # Remove the UUID '-'.
+    return random[0:string_length] # Return the random string.
+
+
+# Functions stop here
+
+try:
+    passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "r")
+    passwordCheck = "null"
+except:
+    print("The directory of the 'Assets' file was not detected.")
+    time.sleep(2)
+    exit()
+
+
+with open(r"E:\Programming\Daniel_OS_pass.txt", "r") as f:
+    data = f.readlines()
+
+for line in data:
+    infoList = line.split(";")
+
+password = infoList[0]
+FAemail = infoList[1]
+FAstate = infoList[2]
+
+# This script checks the time is 1st of April
+currentDT = datetime.datetime.now()
+if currentDT.strftime("%m") == "04" and currentDT.strftime("%d") == "01":
+    print("Happy April Fools Day! (;")
+
+# Resets all variables
+unlockAttempt = 0
+n1 = 0
+n2 = 1
+name = 0
+age = 0
+loggingIn = 1
+
+# Checks for Password
+while loggingIn == 1:
+    userInput = input("Please enter the password ")
+    if userInput == password:
+        print("Password correct!")
+        if infoList[2] == "true":
+            print("2FA has been enabled.")
+            FAcode = my_random_string(8)
+            port = 465  # For SSL
+            password = "5xPCPGIsBn6YN8sangyYY7bVB#QD#ahi3UYEF&zsAsKINH4rYxem61Mngmy#02@8"
+
+            # Create a secure SSL context
+            context = ssl.create_default_context()
+
+            with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+                server.login("develeopmenttest1@gmail.com", password)
+
+                import smtplib, ssl
+
+            port = 465  # For SSL
+            smtp_server = "smtp.gmail.com"
+            sender_email = "develeopmenttest1@gmail.com"  # Enter your address
+
+            message = """Subject: Your 2FA code
+            
+                        Thank you for enabling 2FA. Your 2FA code is {FA}""".format(FA=FAcode)
+
+            context = ssl.create_default_context()
+            with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+                server.login(sender_email, password)
+                server.sendmail(sender_email, FAemail, message)
+            print("An email has been sent to", FAemail)
+            userInput = input("Please input the code below ")
+            if userInput == FAcode:
+                print("Access Granted!")
+                passFile.close()
+                loggingIn = 0
+            else:
+                print("Incorrect code")
+        else:
+            print("Access Granted!")
+            passFile.close()
+            loggingIn = 0
     else:
-        if ips > 4:
-            exit()
-        ips = ips + 1
-        print("Password Incorrect. ",ips, "attempts so far." )
-while access == 1:
-    commandInput = input("Input Commands here: ")
-    if commandInput == "!meh":
-        print(":|")
-    if commandInput == "!happy":
-        print(":)")
-    if commandInput == "!sad":
-        print(":(")
-    if commandInput == "!help":
-        print("Use !Calc to do basic Mathematics problems ")
-        print("Use !shutdown to shutdown the terminal.")
-        print("Use !TheHunterDX to play The Hunter Deluxe.")
-        if Hunter2 == "true":
-            print("Use !HunterII to play The Hunter 2")
-        if Hunter2 == "false":
-            print("Install The Hunter 2 By beating The Hunter DX!")
-        print("Use !TextwriterPro to execute TextwriterPro 0.1.1")
-        print("Use !Morehelp fore more help options")
-    if commandInput == "!Morehelp":
-        print("Use !info to get your name, age and email.")
-        print("Use !date to get the current date/time.")
-        print("Use !count to print all numbers from 0 to your choice.")
-        print("Use !config to open Configuration Settings. (!configinfo for more")
-    if commandInput == "!count":
-        counting = 0
-        endcount = input("The program will count to :")
-        if int(endcount) >= 500000:
-            print("The number is too large!")
-        else:
-            while counting <= int(endcount):
-                print(counting)
-                counting = counting + 1
-    if commandInput == "!date":
-        import datetime
-        now = datetime.datetime.now()
-        print("Current date and time: ")
-        print(now.strftime("%Y-%m-%d %H:%M:%S"))
-    if commandInput == "!configinfo":
-        print("ALL OF THESE ONLY WORK IN CONFIG")
-        print("Use !setpassword to change the password")
-        print("Use !setinfo to change your info")
-        print("Use !2FA to see the 2FA settings")
-        print("Use !secretcommands to see secret commands")
-    if commandInput == "!TextwriterPro":
-        rorw = input("Read or Write?")
-        if rorw == ("Write"):
-            textwriter = input("Enter Text:")
-            TextFile = open(r"Txtwrter.txt", "w")
-            TextFile.write(textwriter)
-            TextFile.close()
-            print("File Saved.")
-        else:
-            if rorw == ("Read"):
-                readtext1 = open(r"Txtwrter.txt","r")
-                if readtext1.mode == "r":
-                    readtext = readtext1.read()
-                print(readtext)
-                input("Press enter to close.")
-    if commandInput == "!TheHunterDX":
-        answer1 = 2
-        answer2 = 2
-        answer3 = 2
-        answer4 = 2
-        answer5 = 2
-        answer6 = 2
-        answer7 = 2
-        print("T H E")
-        print("|_| | | |\| -- |- |}")
-        print("| | |-| | | |  |- |.")
-        print("                 DX")
-        print("(c) Yetroll Entertainment 2019")
-        print("Use either z or x to control.")
-        input("Press <-| Enter to begin your quest for survival.")
-        print("You are in the jungle. A person")
-        print("called John Murray is hunting you.")
-        print("There is a split pathway. where do")
-        gameanswer = input("you go?")
-        if gameanswer == "z":
-            answer1 = 1
-        else:
-            answer1 = 0
-            if answer1 == "1":
-                print("You turn right.")
-                print("Stupid move. he's there.")
-                print("You Die. Game Over")
-                input("Press enter to continue.")
-            if answer1 == 0:
-                print("You turn left. You hear a")
-                print("scream followed by a groan")
-                print("do you jump(z) or go back?(x)")
-                gameanswer = input("")
-                if gameanswer == "z":
-                    print("You jump down the gap.")
-                    print("A thud is heard.")
-                    print("You lose.")
-                    input("Game over. Press enter to continue")
-                else:
-                    print("You turn back. To be greeted by John Murray")
-                    gameanswer = input("Fight(z) or run(x)?")
-                    if gameanswer == 'x':
-                        print("you run.")
-                        print("you trip.")
-                        print("John kills you.")
-                        print("Game over.")
-                        input("Press enter to continue.")
-                    if gameanswer == "z":
-                        print("You fight a glorious fight")
-                        print("You stab him in the neck and run")
-                        print("You win...")
-                        gameanswer = input("Game over. Do you want 'The Hunter II' for $11? Y/N")
-                        if gameanswer == "Y":
-                           if Hunter2 == "true":
-                                print("The Hunter 2 Is already Installed!")
+        print("Incorrect password, please try again")
+
+n2 = 0
+# The following loop looks at what command you type and reacts accordingly
+while n2 == 0:
+    commandInput = input("How may I help you today? ")
+    if commandInput == "/help":
+        # Put all the help for commands here
+        print("Use /sysinfo to bring up information about the system!")
+        print("Use /calculator to do basic addition problems!")
+        print("Use /setpassword to change your password!")
+        print("Use /shutdown to shutdown the terminal!")
+        print("Use /setinfo to set your name and age!")
+        print("Use /info to get your name and age!")
+        print("Use /time to get the current time!")
+        print("Use /date to get the current date!")
+        print("Use /setPass to change your password!")
+        print("Use /2FAconfig to enable or disable 2FA")
+    else:
+        if commandInput == "/calculator":
+            try:
+                n = 0
+                k = 0
+                operation = 0
+                while n == 0:
+                    k = 0
+                    operation = 0
+                    print("Welcome to the calculator! I support addition, subtraction, division and multiplication!")
+                    input("Press enter to continue!")
+                    while operation == 0:
+                        print("Would you like for me to")
+                        print("Add (a)")
+                        print("Subtract (s)")
+                        print("Multiply (m)")
+                        inputAnswer = input("or Divide? (d)")
+                        if inputAnswer == "a":
+                            operation = "a"
                         else:
-                            print('Sorry! Our servers seem to be offline!')
-                        if gameanswer == "N":
-                            print("Exiting The Hunter DX...")
-                        if gameanswer == "Freebie123":
-                            if Hunter2 == "true":
-                                print("The Hunter 2 Is already Installed!")
+                            if inputAnswer == "s":
+                                operation = "s"
                             else:
-                                print("Verification Code activated. Installing")
-                                print("The Hunter II.")
-                                Huntertwo = open(r"hunter2installed.txt", "w")
-                                Huntertwo.write("true")
-                                Huntertwo.close()
-                                hunterii = open(r"hunter2installed.txt", "r")
-                                if hunterii.mode == "r":
-                                    Hunter2 = hunterii.read()
-                                print("Installation complete. see !help")
-                                print("to execute the game.")
-                                input("Press enter to continue.")
-                        else:
-                            print("Exiting The Hunter DX")
-    if commandInput == "!HunterII":
-        if Hunter2 == "false":
-            print("")
-        if Hunter2 == "true":
-            answer1 = 2
-            answer2 = 2
-            answer3 = 2
-            answer4 = 2
-            answer5 = 2
-            answer6 = 2
-            answer7 = 2
-            print("T H E")
-            print("| | | | |\| -- |- |} 2")
-            print("|-| |-| | | |  |- |.")
-            print("REVENGE OF THE MURRAY")
-            print("(c) Yetroll Entertainment 2019")
-            print("Use either z or x to control.")
-            input("Press <-| Enter to begin your quest for survival.")
-            print("You are in the desert. A family")
-            print("called the Murray's are hunting you.")
-            print("There is a split pathway. where do")
-            gameanswer = input("you go?")
-            if gameanswer == "z":
-                answer1 = 1
-            else:
-                answer1 = 0
-            if answer1 == "1":
-                print("You turn right.")
-                print("Stupid move. The mother's there.")
-                print("You Die. Game Over")
-                input("Press enter to continue.")
-            if answer1 == 0:
-                print("You turn left. You hear a")
-                print("scream followed by a groan")
-                print("do you jump(z) or go back?(x)")
-                gameanswer = input("")
-                if gameanswer == "z":
-                    print("You jump down the gap.")
-                    print("A thud is heard.")
-                    print("You lose.")
-                    input("Game over. Press enter to continue")
-                else:
-                    print("You turn back. To be greeted by John Murray")
-                    gameanswer = input("Fight(z) or run(x)?")
-                    if gameanswer == 'x':
-                        print("you run.")
-                        print("you trip.")
-                        print("The father kills you.")
-                        print("Game over.")
-                        input("Press enter to continue.")
-                    if gameanswer == "z":
-                        print("You fight a glorious fight")
-                        print("You stab all of them in the neck and run")
-                        print("You win...")
-                        print("Exiting The Hunter II...")
-    if commandInput == "!shutdown":
-        print("Shutdown System? Y/N")
-        sds = input("")
-        if sds == ("Y"):
-            exit()
-    if commandInput == "!Info":
-        print("Name :", name)
-        print("Age :", age)
-        print("Email :", email)
-    if commandInput == "!config":
-        print("CarrotOS 0.1.1 Configuration Settings: Input Command Below")
-        settingsfunc = input("")
-        if settingsfunc == input("!sysinfo"):
-            print("CarrotOS 0.1.1 system information")
-            print("(c) 2019 Yetroll Enterprises; CarroTech Industries ")
-            print("Coded by Daniel P, Shaurya J and Malakai H")
-            print("Root By Malakai H.")
-            print("Coded on Python (Pycharm)")
-        if settingsfunc == "!secretcommands":
-            print("Secret commands...")
-            print("ONLY ACTIVATED BY MAIN TERMINAL.")
-            print("THESE COMMANDS DO NOT WORK IN CONFIG")
-            print("Use !meh to show 'meh' face.")
-            print("Use !sad to show 'sad' face.")
-            print("Use !happy to show 'happy' face.")
-        if settingsfunc == "!setinfo":
-            newname = input("New Name:")
-            passFile = open(r"name.txt", "w")
-            passFile.write(newname)
-            print("Name saved as", newname)
-            passFile.close()
-            newage = input("New Age:")
-            passFile = open(r"age.txt", "w")
-            passFile.write(newage)
-            print("Age saved as", newage)
-            passFile.close()
-            newemail = input("New Email:")
-            passFile = open(r"email.txt", "w")
-            passFile.write(newemail)
-            print("Email saved as", newemail)
-            passFile.close()
-        if settingsfunc == "!setpassword":
-            psreset = input("Input old password: ")
-            if psreset == (contents):
-                    newpsrd = input("Enter New Password: ")
-                    passFile = open(r"pswrd.txt", "w")
-                    passFile.write(newpsrd)
-                    passFile.close()
-                    print("Password Saved.")
-    if commandInput == "!Calc":
-        print("Welcome to the addition, subtraction, division and multiplication calculator")
-        print("Root by Daniel P")
-        input("Press enter to continue!")
-        print("Enter the operation you want.")
-        print("Add (a)")
-        print("Subtract (s)")
-        print("Multiply (m)")
-        print("Divide (d)")
-        inputAnswer = input("Input Choice:")
-        if inputAnswer == "a":
-            operation = "a"
-        else:
-            if inputAnswer == "s":
-                operation = "s"
-            else:
-                if inputAnswer == "m":
-                    operation = "m"
-                else:
-                    if inputAnswer == "d":
-                        operation = "d"
-                    else:
-                        print("Please use either a, s, m or d")
-            firstNumber = int(input("Input first number."))
-            secondNumber = int(input("Input second number."))
-            if inputAnswer == "a":
-                answer = firstNumber + secondNumber
-            else:
-                if inputAnswer == "s":
-                    answer = firstNumber - secondNumber
-                else:
-                        if inputAnswer == "m":
-                            answer = firstNumber * secondNumber
-                        else:
-                            if inputAnswer == "d":
-                                if secondNumber == 0:
-                                    print("Cannot Divide By 0!")
+                                if inputAnswer == "m":
+                                    operation = "m"
                                 else:
+                                    if inputAnswer == "d":
+                                        operation = "d"
+                                    else:
+                                        print("Sorry! Please use either a, s, m or d")
+                    firstNumber = int(input("What is your first number? "))
+                    secondNumber = int(input("What is your second number? "))
+                    if inputAnswer == "a":
+                        answer = firstNumber + secondNumber
+                    else:
+                        if inputAnswer == "s":
+                            answer = firstNumber - secondNumber
+                        else:
+                            if inputAnswer == "m":
+                                answer = firstNumber * secondNumber
+                            else:
+                                if inputAnswer == "d":
                                     answer = firstNumber / secondNumber
-        print("Your answer is", answer)
-    else:
-        print("")
+                    print("Your answer was", answer)
+                    while k == 0:
+                        inputAnswer = input("Would you like to use the calculator again? [y / n] ")
+                        if inputAnswer == "n":
+                            n = 1
+                            k = 1
+                        else:
+                            if inputAnswer == "y":
+                                print("Sure thing!")
+                                k = 1
+                            else:
+                                print("Please enter either y or n")
+            except:
+                print("It seems that an number that you have inputted has crashed the calculator. Please try again.")
+
+        else:
+            if commandInput == "/setPass":
+                passwordCheck = input("Verify it's you by inputting the previous password ")
+                if passwordCheck == password:
+                    passFile.close()
+                    passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "w")
+                    passwordCheck = input("What would you like to set the password to? ")
+                    print("password successfully set to", passwordCheck)
+                    infoList[0] = passwordCheck
+                    convertedList = ';'.join(infoList)
+                    passFile.write(convertedList)
+                    passFile.close()
+                    password = infoList[0]
+                else:
+                    print("Incorrect password entered")
+            else:
+                if commandInput == "/shutdown":
+                    print("Shutting down")
+                    time.sleep(1)
+                    print(".")
+                    time.sleep(1)
+                    print("..")
+                    time.sleep(1)
+                    print("...")
+                    time.sleep(1)
+                    n2 = 1
+                else:
+                    if commandInput == "/setinfo":
+                        # I need to implement this to make it write the info the the text file
+                        name = input("What is your name? ")
+                        age = input("What is your age? ")
+
+
+                    else:
+                        if commandInput == "/info":
+                            if name == 0 and age == 0:
+                                print("Info has not been set, to set your info please type /setinfo")
+                            else:
+                                print("Your name is", name)
+                                print("You are", age, "years old")
+                        else:
+                            if commandInput == "/time":
+                                # Fetches the time and formats it to display it
+                                currentDT = datetime.datetime.now()
+                                print("The current time is", (currentDT.strftime("%I:%M:%S %p")))
+                            else:
+                                if commandInput == "/date":
+                                    # Fetches the date and formats it to display it
+                                    currentDT = datetime.datetime.now()
+                                    print("The current date is", (currentDT.strftime("%d/%m/%Y")))
+                                else:
+                                    if commandInput == "/changePass":
+                                        oldPass = input("Please input old password ")
+                                        if oldPass == password:
+                                            passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "w")
+                                            newPass = input("What would you like to change the password to? ")
+                                            passFile.write(newPass)
+                                            passFile.close()
+                                        else:
+                                            print("Sorry, incorrect password")
+                                    else:
+                                        if commandInput == "/2FAconfig":
+                                        # You can enable or disable 2FA right here
+                                            userInput = input("Would you like to enable 2FA (/enable2FA) or disable 2FA (/disable2FA)? ")
+                                            if userInput == "/enable2FA":
+                                                passwordCheck = input("Verify it's you by inputting the previous password ")
+                                                if passwordCheck == password:
+                                                    FAemail = input("Please input your 2FA email ")
+                                                    FAcode = my_random_string(8)
+                                                    port = 465  # For SSL
+                                                    password = "5xPCPGIsBn6YN8sangyYY7bVB#QD#ahi3UYEF&zsAsKINH4rYxem61Mngmy#02@8"
+
+                                                    # Create a secure SSL context
+                                                    context = ssl.create_default_context()
+
+                                                    with smtplib.SMTP_SSL("smtp.gmail.com", port,
+                                                                          context=context) as server:
+                                                        server.login("develeopmenttest1@gmail.com", password)
+
+                                                        import smtplib, ssl
+
+                                                    port = 465  # For SSL
+                                                    smtp_server = "smtp.gmail.com"
+                                                    sender_email = "develeopmenttest1@gmail.com"  # Enter your address
+
+                                                    message = """Subject: Your 2FA code
+                                                                
+                                                                Thank you for enabling 2FA. Your 2FA code is {FA}""".format(FA=FAcode)
+
+                                                    context = ssl.create_default_context()
+                                                    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+                                                        server.login(sender_email, password)
+                                                        server.sendmail(sender_email, FAemail, message)
+                                                    print("An email has been sent to", FAemail)
+                                                    userInput = input("We have sent you a 2FA code. Please input below ")
+
+                                                    if FAcode == userInput:
+                                                        FAstate = "true"
+                                                        passFile.close()
+                                                        passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "w")
+                                                        infoList[1] = FAemail
+                                                        infoList[2] = FAstate
+                                                        convertedList = ';'.join(infoList)
+                                                        passFile.write(convertedList)
+                                                        passFile.close()
+
+                                                        print("Two Factor Authentication has been enabled with", FAemail)
+                                                    else:
+                                                        print("Incorrect code inputted, please try again")
+
+
+                                                else:
+                                                    print("Incorrect password entered")
+
+                                            else:
+                                                if userInput == "/disable2FA":
+                                                    passwordCheck = input("Verify it's you by inputting the previous password ")
+                                                    if passwordCheck == password:
+                                                        FAemail = input("Please input your 2FA email ")
+                                                        FAcode = my_random_string(8)
+                                                        port = 465  # For SSL
+                                                        password = "5xPCPGIsBn6YN8sangyYY7bVB#QD#ahi3UYEF&zsAsKINH4rYxem61Mngmy#02@8"
+
+                                                        # Create a secure SSL context
+                                                        context = ssl.create_default_context()
+
+                                                        with smtplib.SMTP_SSL("smtp.gmail.com", port,
+                                                                              context=context) as server:
+                                                            server.login("develeopmenttest1@gmail.com", password)
+
+                                                            import smtplib, ssl
+
+                                                        port = 465  # For SSL
+                                                        smtp_server = "smtp.gmail.com"
+                                                        sender_email = "develeopmenttest1@gmail.com"  # Enter your address
+
+                                                        message = """Subject: Your 2FA code
+                                                        
+                                                        Thank you for enabling 2FA. Your 2FA code is {FA}""".format(FA=FAcode)
+
+                                                        context = ssl.create_default_context()
+                                                        with smtplib.SMTP_SSL(smtp_server, port,
+                                                                              context=context) as server:
+                                                            server.login(sender_email, password)
+                                                            server.sendmail(sender_email, FAemail, message)
+                                                        print("An email has been sent to", FAemail)
+                                                        userInput = input("We have sent you a 2FA code. Please input below ")
+                                                        if FAcode == userInput:
+                                                            FAstate = "false"
+                                                            passFile.close()
+                                                            passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "w")
+                                                            infoList[1] = FAemail
+                                                            infoList[2] = FAstate
+                                                            convertedList = ';'.join(infoList)
+                                                            passFile.write(convertedList)
+                                                            passFile.close()
+
+                                                            print("Two Factor Authentication has been disabled with",FAemail)
+                                                        else:
+                                                            print("Incorrect code inputted, please try again")
+                                                    else:
+                                                        print("Incorrect password entered")
+                                                else:
+                                                    print("Unknown command")
+                                        else:
+                                            if commandInput == "/sysinfo":
+                                                print("DarrotOS 0.1.1 system information")
+                                                print("(c) 2019 Yetroll Enterprises; CarroTech Industries; The Coding Monkeys inc ")
+                                                print("Coded by Daniel P, Shaurya J and Malakai H")
+                                                print("Root By Daniel P + Malakai H.")
+                                                print("You can visit the github page for this project ---> https://github.com/daniel071/Darrot-OS")
+                                                print("Coded on Python (Pycharm)")
+                                                # More info can be added here
+                                            else:
+                                                if commandInput == "newCommandHere":
+                                                    print("Work in progress (This is put here to prevent a syntax error")
+                                                    # New command goes here
+                                                else:
+                                                    print("Unknown command")
