@@ -1,13 +1,20 @@
-# First message to run
-print("Welcome to DarrotOS 0.1.1")
-print("(c) 2019 Yetroll Enterprises; CarroTech Industries; The coding Monkeys inc ")
-print("Coded by Daniel P, Shaurya J and Malakai H")
+# All import scripts to be here:
 import uuid
 import smtplib, ssl
 import time
 import datetime
 
-# All functions go here: 
+# Import scripts stop here
+
+
+# First message to run
+print("Welcome to DarrotOS 0.1.1")
+print("(c) 2019 Yetroll Enterprises; CarroTech Industries; The coding Monkeys inc ")
+print("Coded by Daniel P, Shaurya J and Malakai H")
+
+
+
+# All functions go here:
 
 def my_random_string(string_length):
     """Returns a random string of length string_length."""
