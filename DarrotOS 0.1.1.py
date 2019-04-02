@@ -125,6 +125,7 @@ while n2 == 0:
         print("Use /date to get the current date!")
         print("Use /setPass to change your password!")
         print("Use /2FAconfig to enable or disable 2FA")
+        print("Use /substituteTXT to substitute different words!")
     else:
         if commandInput == "/calculator":
             try:
@@ -384,9 +385,29 @@ while n2 == 0:
                                                 print("Coded on Python (Pycharm)")
                                                 # More info can be added here
                                             else:
-                                                if commandInput == "newCommandHere":
-                                                    print(
-                                                        "Work in progress (This is put here to prevent a syntax error")
-                                                    # New command goes here
+                                                if commandInput == "/substituteTXT":
+                                                    print("Hello! I will substitute words into different words in text documents!")
+                                                    try:
+                                                        substituteDirectory = input("Please input the file directory of the document ")
+                                                        substituteFile = open(directory, "r")
+                                                    except:
+                                                        print("Please input the correct directory!")
+                                                        time.sleep(2)
+                                                        exit()
+
+                                                    textFile = substituteFile.read()
+                                                    str(textFile)
+                                                    substituteFile.close()
+                                                    wordToSub = input("Which word do you want to substitute? ")
+                                                    wordToReplaceWith = input("Which word do you want to substitute to? ")
+                                                    newFile = textFile.replace(wordToSub, wordToReplaceWith)
+                                                    substituteFile = open(substituteFile, "w")
+                                                    substituteFile.write(newFile)
+                                                    substituteFile.close()
+                                                    print("Substituted", wordToSub, "with", wordToReplaceWith,"successfully!")
                                                 else:
-                                                    print("Unknown command")
+                                                    if commandInput == "newCommandHere":
+                                                        print("Work in progress (This is put here to prevent a syntax error")
+                                                        # New command goes here
+                                                    else:
+                                                        print("Unknown command")
