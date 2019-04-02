@@ -3,9 +3,14 @@ import uuid
 import smtplib, ssl
 import time
 import datetime
+import os
 
 # Import scripts stop here
 
+directoryOne = dir_path = os.path.dirname(os.path.realpath(__file__))
+directoryTwo = "\Daniel_OS_pass.txt"
+directoryString = [directoryOne, directoryTwo]
+directory = "".join(directoryString)
 
 # First message to run
 print("Welcome to DarrotOS 0.1.1")
@@ -26,14 +31,14 @@ def my_random_string(string_length):
 # Functions stop here
 
 try:
-    passFile = open(r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt", "r")
+    passFile = open(directory, "r")
     passwordCheck = "null"
 except:
-    print("The directory of the 'Assets' file was not detected.")
+    print("It seems the auto directory has not worked, please try again.")
     time.sleep(2)
     exit()
 
-with open(r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt", "r") as f:
+with open(directory, "r") as f:
     data = f.readlines()
 
 for line in data:
@@ -183,7 +188,7 @@ while n2 == 0:
                 passwordCheck = input("Verify it's you by inputting the previous password ")
                 if passwordCheck == password:
                     passFile.close()
-                    passFile = open(r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt", "w")
+                    passFile = open(directory, "w")
                     passwordCheck = input("What would you like to set the password to? ")
                     print("password successfully set to", passwordCheck)
                     infoList[0] = passwordCheck
@@ -207,7 +212,7 @@ while n2 == 0:
                 else:
                     if commandInput == "/setinfo":
                         # I need to implement this to make it write the info the the text file
-                        passFile = open(r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt", "w")
+                        passFile = open(directory, "w")
                         name = input("What is your name? ")
                         age = input("What is your age? ")
                         infoList[3] = name
@@ -243,7 +248,7 @@ while n2 == 0:
                                             FAstate = "false"
                                             passFile.close()
                                             passFile = open(
-                                                r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt", "w")
+                                                directory, "w")
                                             infoList[0] = password
                                             infoList[1] = FAemail
                                             infoList[2] = FAstate
@@ -298,7 +303,7 @@ while n2 == 0:
                                                         FAstate = "true"
                                                         passFile.close()
                                                         passFile = open(
-                                                            r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt",
+                                                            directory,
                                                             "w")
                                                         infoList[1] = FAemail
                                                         infoList[2] = FAstate
@@ -354,9 +359,7 @@ while n2 == 0:
                                                         if FAcode == userInput:
                                                             FAstate = "false"
                                                             passFile.close()
-                                                            passFile = open(
-                                                                r"E:\Darrot-OS\Darrot-OS\Daniel_OS_pass.txt",
-                                                                "w")
+                                                            passFile = open(directory,"w")
                                                             infoList[1] = FAemail
                                                             infoList[2] = FAstate
                                                             convertedList = ';'.join(infoList)
@@ -374,12 +377,10 @@ while n2 == 0:
                                         else:
                                             if commandInput == "/sysinfo":
                                                 print("DarrotOS 0.1.1 system information")
-                                                print(
-                                                    "(c) 2019 Yetroll Enterprises; CarroTech Industries; The Coding Monkeys inc ")
+                                                print("(c) 2019 Yetroll Enterprises; CarroTech Industries; The Coding Monkeys inc ")
                                                 print("Coded by Daniel P, Shaurya J and Malakai H")
                                                 print("Root By Daniel P + Malakai H.")
-                                                print(
-                                                    "You can visit the github page for this project ---> https://github.com/daniel071/Darrot-OS")
+                                                print("You can visit the github page for this project ---> https://github.com/daniel071/Darrot-OS")
                                                 print("Coded on Python (Pycharm)")
                                                 # More info can be added here
                                             else:
