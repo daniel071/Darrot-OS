@@ -3,9 +3,15 @@ import uuid
 import smtplib, ssl
 import time
 import datetime
+import os
 
 # Import scripts stop here
 
+
+directoryOne = dir_path = os.path.dirname(os.path.realpath(__file__))
+directoryTwo = "\Daniel_OS_pass.txt"
+directoryString = [directoryOne, directoryTwo]
+directory = "".join(directoryString)
 
 # First message to run
 print("Welcome to DarrotOS 0.1.1")
@@ -27,10 +33,10 @@ def my_random_string(string_length):
 # Functions stop here
 
 try:
-    passFile = open(r"E:\Programming\Daniel_OS_pass.txt", "r")
+    passFile = open(directory, "r")
     passwordCheck = "null"
 except:
-    print("The directory of the 'Assets' file was not detected.")
+    print("It seems the auto directory has not worked, please try again.")
     time.sleep(2)
     exit()
 
