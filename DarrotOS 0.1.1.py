@@ -1,9 +1,11 @@
 # All import scripts to be here:
+
 import uuid
 import smtplib, ssl
 import time
 import datetime
 import os
+import webbrowser
 
 # Import scripts stop here
 
@@ -124,20 +126,10 @@ while n2 == 0:
     commandInput = input("How may I help you today? ")
     if commandInput == "/help":
         # Put all the help for commands here
-        print("Use /productivity to bring up the productivity terminal")
-        print("Use /entertainment to bring up the entertainment terminal")
-        print("Use /sysinfo to bring up information about the system")
-        print("Use /calculator to do basic addition problems")
-        print("Use /shutdown to shutdown the terminal")
-        print("Use /setinfo to set your name and age")
-        print("Use /info to get your name and age")
-        print("Use /time to get the current time")
-        print("Use /date to get the current date")
-        print("Use /setPass to change your password")
-        print("Use /2FAconfig to enable or disable 2FA")
-        print("")
-        print("Still confused? Visit the wiki here ---> https://github.com/daniel071/Darrot-OS/wiki")
-        print("")
+        print("Redirecting you to the wiki page")
+        time.sleep(1)
+        webbrowser.open('https://github.com/daniel071/Darrot-OS/wiki/Root-terminal')
+
     else:
         if commandInput == "/calculator":
             try:

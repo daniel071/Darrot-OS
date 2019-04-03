@@ -1,6 +1,7 @@
 # All import scripts to be here:
 
 import time
+import webbrowser
 
 # Import scripts stop here
 
@@ -22,8 +23,9 @@ while loop == 1:
     print(userInput)
     if userInput == "/help":
         # Help for each command can be placed here
-        print("Help info here")
-        print("Use /substitutetxt to substitute a text file. The wizard will guide you through")
+        print("Redirecting you to the wiki page")
+        time.sleep(1)
+        webbrowser.open('https://github.com/daniel071/Darrot-OS/wiki/Productivity-terminal')
 
     else:
         # Make sure all commands are lowercase

@@ -1,6 +1,8 @@
 # All import scripts to be here:
 
 import time
+import webbrowser
+
 
 # Import scripts stop here
 
@@ -20,7 +22,9 @@ while loop == 1:
     userInput = input("Please input Entertainment command ").lower()
     if userInput == "/help":
         # Help for each command can be placed here
-        print("Help info here")
+        print("Redirecting you to the wiki page")
+        time.sleep(1)
+        webbrowser.open('https://github.com/daniel071/Darrot-OS/wiki/Entertainment-terminal')
     else:
         # Make sure all commands are lowercase
         if userInput == "/shutdown":
