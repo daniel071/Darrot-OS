@@ -397,8 +397,7 @@ while n2 == 0:
                                                         print("Opened Productivity terminal")
                                                     else:
                                                         if commandInput == "newCommandHere":
-                                                            print(
-                                                                "Work in progress (This is put here to prevent a syntax error")
+                                                            print("Work in progress (This is put here to prevent a syntax error")
                                                             # New command goes here
                                                         else:
                                                             print("Unknown command")
