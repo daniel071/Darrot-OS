@@ -1,9 +1,11 @@
 # All import scripts to be here:
+
 import uuid
 import smtplib, ssl
 import time
 import datetime
 import os
+import webbrowser
 
 # Import scripts stop here
 
@@ -26,6 +28,10 @@ def my_random_string(string_length):
     random = random.upper()  # Make all characters uppercase.
     random = random.replace("-", "")  # Remove the UUID '-'.
     return random[0:string_length]  # Return the random string.
+
+
+def killProcess(pid):
+    os.Popen('TASKKILL /F /PID {0}'.format(pid), shell=True)
 
 
 # Functions stop here
@@ -121,17 +127,10 @@ while n2 == 0:
     commandInput = input("How may I help you today? ")
     if commandInput == "/help":
         # Put all the help for commands here
-        print("Use /sysinfo to bring up information about the system!")
-        print("Use /calculator to do basic addition problems!")
-        print("Use /setpassword to change your password!")
-        print("Use /shutdown to shutdown the terminal!")
-        print("Use /setinfo to set your name and age!")
-        print("Use /info to get your name and age!")
-        print("Use /time to get the current time!")
-        print("Use /date to get the current date!")
-        print("Use /setPass to change your password!")
-        print("Use /2FAconfig to enable or disable 2FA")
-        print("Use /substituteTXT to substitute different words!")
+        print("Redirecting you to the wiki page")
+        time.sleep(1)
+        webbrowser.open('https://github.com/daniel071/Darrot-OS/wiki/Root-terminal')
+
     else:
         if commandInput == "/calculator":
             try:
@@ -207,15 +206,9 @@ while n2 == 0:
                     print("Incorrect password entered")
             else:
                 if commandInput == "/shutdown":
-                    print("Shutting down")
-                    time.sleep(1)
-                    print(".")
-                    time.sleep(1)
-                    print("..")
-                    time.sleep(1)
-                    print("...")
-                    time.sleep(1)
-                    n2 = 1
+                    os.system("taskkill /f /im py.exe")
+                    exit()
+
                 else:
                     if commandInput == "/setinfo":
                         # I need to implement this to make it write the info the the text file
@@ -391,29 +384,16 @@ while n2 == 0:
                                                 print("Coded on Python (Pycharm)")
                                                 # More info can be added here
                                             else:
-                                                if commandInput == "/substituteTXT":
-                                                    print("Hello! I will substitute words into different words in text documents!")
-                                                    try:
-                                                        substituteDirectory = input("Please input the file directory of the document ")
-                                                        substituteFile = open(directory, "r")
-                                                    except:
-                                                        print("Please input the correct directory!")
-                                                        time.sleep(2)
-                                                        exit()
-
-                                                    textFile = substituteFile.read()
-                                                    str(textFile)
-                                                    substituteFile.close()
-                                                    wordToSub = input("Which word do you want to substitute? ")
-                                                    wordToReplaceWith = input("Which word do you want to substitute to? ")
-                                                    newFile = textFile.replace(wordToSub, wordToReplaceWith)
-                                                    substituteFile = open(substituteFile, "w")
-                                                    substituteFile.write(newFile)
-                                                    substituteFile.close()
-                                                    print("Substituted", wordToSub, "with", wordToReplaceWith,"successfully!")
+                                                if commandInput == "/entertainment":
+                                                    os.startfile("Darrot_OS_Entertainment.py")
+                                                    print("Opened Entertainment terminal")
                                                 else:
-                                                    if commandInput == "newCommandHere":
-                                                        print("Work in progress (This is put here to prevent a syntax error")
-                                                        # New command goes here
+                                                    if commandInput == "/productivity":
+                                                        os.startfile("Darrot_OS_Productivity.py")
+                                                        print("Opened Productivity terminal")
                                                     else:
-                                                        print("Unknown command")
+                                                        if commandInput == "newCommandHere":
+                                                            print("Work in progress (This is put here to prevent a syntax error")
+                                                            # New command goes here
+                                                        else:
+                                                            print("Unknown command")
