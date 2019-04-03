@@ -57,7 +57,10 @@ currentDT = datetime.datetime.now()
 if currentDT.strftime("%m") == "04" and currentDT.strftime("%d") == "01":
     print("Sorry, Darrot OS has been abandoned by it's creators and will unfortunately not be able to work anymore.")
     time.sleep(2)
-    exit()
+    print("Sorry for the inconvenience")
+    time.sleep(2)
+    print("APRIL FOOLS!")
+    time.sleep(2)
 
 # Resets all variables
 unlockAttempt = 0
