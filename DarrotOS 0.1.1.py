@@ -5,10 +5,6 @@ import time
 import datetime
 import os
 
-command = "cmd"
-os.system(command)
-
-
 # Import scripts stop here
 
 directoryOne = dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -30,6 +26,10 @@ def my_random_string(string_length):
     random = random.upper()  # Make all characters uppercase.
     random = random.replace("-", "")  # Remove the UUID '-'.
     return random[0:string_length]  # Return the random string.
+
+
+def killProcess(pid):
+    os.Popen('TASKKILL /F /PID {0}'.format(pid), shell=True)
 
 
 # Functions stop here
@@ -210,15 +210,9 @@ while n2 == 0:
                     print("Incorrect password entered")
             else:
                 if commandInput == "/shutdown":
-                    print("Shutting down")
-                    time.sleep(1)
-                    print(".")
-                    time.sleep(1)
-                    print("..")
-                    time.sleep(1)
-                    print("...")
-                    time.sleep(1)
-                    n2 = 1
+                    os.system("taskkill /f /im py.exe")
+                    exit()
+
                 else:
                     if commandInput == "/setinfo":
                         # I need to implement this to make it write the info the the text file
@@ -415,8 +409,17 @@ while n2 == 0:
                                                     substituteFile.close()
                                                     print("Substituted", wordToSub, "with", wordToReplaceWith,"successfully!")
                                                 else:
-                                                    if commandInput == "newCommandHere":
-                                                        print("Work in progress (This is put here to prevent a syntax error")
-                                                        # New command goes here
+                                                    if commandInput == "/entertainment":
+                                                        os.startfile("Darrot_OS_Entertainment.py")
+                                                        print("Opened Entertainment terminal")
                                                     else:
-                                                        print("Unknown command")
+                                                        if commandInput == "/productivity":
+                                                            os.startfile("Darrot_OS_Productivity.py")
+                                                            print("Opened Productivity terminal")
+                                                        else:
+                                                            if commandInput == "newCommandHere":
+                                                                print(
+                                                                    "Work in progress (This is put here to prevent a syntax error")
+                                                                # New command goes here
+                                                            else:
+                                                                print("Unknown command")
