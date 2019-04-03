@@ -136,7 +136,6 @@ while n2 == 0:
         print("Use /date to get the current date")
         print("Use /setPass to change your password")
         print("Use /2FAconfig to enable or disable 2FA")
-        print("Use /substituteTXT to substitute different words")
         print("")
         print("Still confused? Visit the wiki here ---> https://github.com/daniel071/Darrot-OS/wiki")
         print("")
