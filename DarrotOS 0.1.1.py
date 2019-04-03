@@ -5,6 +5,10 @@ import time
 import datetime
 import os
 
+command = "cmd"
+os.system(command)
+
+
 # Import scripts stop here
 
 directoryOne = dir_path = os.path.dirname(os.path.realpath(__file__))
