@@ -1,5 +1,6 @@
 # All import scripts to be here:
 
+# test commit
 import uuid
 import smtplib, ssl
 import time
@@ -28,7 +29,6 @@ def my_random_string(string_length):
     random = random.upper()  # Make all characters uppercase.
     random = random.replace("-", "")  # Remove the UUID '-'.
     return random[0:string_length]  # Return the random string.
-
 
 def killProcess(pid):
     os.Popen('TASKKILL /F /PID {0}'.format(pid), shell=True)
@@ -385,7 +385,9 @@ while n2 == 0:
                                                 # More info can be added here
                                             else:
                                                 if commandInput == "/entertainment":
+                                                    time.sleep(5)
                                                     os.startfile("Darrot_OS_Entertainment.py")
+                                                    time.sleep(7)
                                                     print("Opened Entertainment terminal")
                                                 else:
                                                     if commandInput == "/productivity":
