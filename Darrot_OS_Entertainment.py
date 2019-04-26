@@ -2,7 +2,7 @@
 
 import time
 import webbrowser
-
+from games import namegame
 
 # Import scripts stop here
 
@@ -36,15 +36,15 @@ while loop == 1:
                 print("Use /gameshelp if you would like to see all the games. Use /stop to exit")
                 gamesLoop = 1
                 while gamesLoop == 1:
-                    input("Please input games command")
+                    userInput = input("Please input games command").lower()
                     if userInput == "/gameshelp":
                         # Place games help here
                         print("Games help")
                     else:
                         # The following area you can add new games
 
-                        if userInput == "workinprogress":
-                            print("WorkInProgress")
+                        if userInput == "/namegame":
+                            namegame.name_game()
                         else:
                             if userInput == "workinprogress":
                                 print("WorkInProgress")

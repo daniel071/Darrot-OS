@@ -15,8 +15,7 @@ This project is still a `WORK-IN-PROGRESS` and all support would be appreciated.
 
 Don't have programming experience? Help us by creating art!
 
-
-
+---
 *Sincerely,*
 
 *The Darrot-OS team*

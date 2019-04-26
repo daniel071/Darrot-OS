@@ -56,21 +56,33 @@ a img{
 }
 
 #ShareThis {
-	text-align:center;
-	margin:auto;
-	margin-top:15px;
-	width:1000px;
+    text-align:
+	center;
+    margin:
+	auto;
+	margin-top:
+	15px;
+	width:
+	1000px;
 }
 
 input[name=Enter] {
-	background-color:red;
-	color:white;
-	font-size:18px;
-	width:200px;
-	height:50px;
-	border:3px black solid;
-	border-radius: 25px;
-	cursor:pointer;
+	background-color:
+	red;
+	color:
+	white;
+	font-size:
+	18px;
+	width:
+	200px;
+	height:
+	50px;
+	border:
+	3px black solid;
+	border-radius:
+	25px;
+	cursor:
+	pointer;
 }
 #TransumApple {
 	width: 142px;
