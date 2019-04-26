@@ -2,7 +2,7 @@
 # Darrot-OS 0.1.1
 ### Introduction:
 Darrot-OS is a FREE open source project designed to create a beginner-friendly operating system
-You can also visit our [Wiki here.] (https://github.com/daniel071/Darrot-OS/wiki)
+You can also visit our [Wiki here.](https://github.com/daniel071/Darrot-OS/wiki)
 
 
 ### Our plan:
