@@ -6,6 +6,8 @@ You can also visit our [Wiki here.](https://github.com/daniel071/Darrot-OS/wiki)
 
 
 ### Our plan:
+A new User-Account system should be in place by Darrot-OS 0.1.2
+
 We are planning to create a new GUI for Darrot-OS expected to come out in release 0.2.0
 
 
