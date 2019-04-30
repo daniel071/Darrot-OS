@@ -1,4 +1,5 @@
 [![first-timers-only](https://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)](https://www.firsttimersonly.com/)
+[![Build Status](https://travis-ci.com/daniel071/Darrot-OS.svg?branch=master)](https://travis-ci.com/daniel071/Darrot-OS)
 # Darrot-OS 0.1.1
 ### Introduction:
 Darrot-OS is a FREE open source project designed to create a beginner-friendly operating system
