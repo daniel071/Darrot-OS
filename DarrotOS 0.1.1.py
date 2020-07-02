@@ -11,7 +11,7 @@ import webbrowser
 # Import scripts stop here
 
 directoryOne = dir_path = os.path.dirname(os.path.realpath(__file__))
-directoryTwo = "\Daniel_OS_pass.txt"
+directoryTwo = "/Daniel_OS_pass.txt"
 directoryString = [directoryOne, directoryTwo]
 directory = "".join(directoryString)
 
@@ -206,7 +206,6 @@ while n2 == 0:
                     print("Incorrect password entered")
             else:
                 if commandInput == "/shutdown":
-                    os.system("taskkill /f /im py.exe")
                     exit()
 
                 else:
